@@ -17,7 +17,7 @@ spec:
 <<<<<<< HEAD
         image:ayushbh01/studybuddy:latest
 =======
-        image: ayushbh01/studybuddy:v24
+        image: ayushbh01/studybuddy:v25
 >>>>>>> e55da16d0938cddd1d7c3561239ea6c31a05cb8f
         ports:
         - containerPort: 8501
