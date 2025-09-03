@@ -40,21 +40,27 @@ pipeline {
             }
         }
 
-        stage('Commit Updated YAML') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
-                        sh '''
-                        git config user.name "ayushbh-dev"
-                        git config user.email "ayushbh32@gmail.com"
-                        git add manifests/deployment.yaml
-                        git commit -m "Update image tag to ${IMAGE_TAG}" || echo "No changes to commit"
-                        git push https://${GITHUB_CREDENTIALS}@github.com/ayushbh-dev/Study_Buddy_AI.git HEAD:main
-                        // '''
-                    }
-                }
+       stage('Commit Updated YAML') {
+    steps {
+        script {
+            // This block securely loads your GitHub credentials
+            // 'github-token' MUST be the ID of your credential in Jenkins
+            withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                
+                // Configure git with your user info for the commit
+                sh 'git config user.name "${ayushbh-dev}"'
+                sh 'git config user.email "ayushbh32@gmail.com"'
+
+                // Add and commit the changed deployment file
+                sh 'git add manifests/deployment.yaml'
+                sh 'git commit -m "Update image tag to ${BUILD_NUMBER}" || echo "No changes to commit"'
+
+                // Push the changes back to your GitHub repository
+                sh 'git push https://${GIT_USER}:${GIT_PASS}@github.com/ayushbh-dev/Study_Buddy_AI.git HEAD:main'
             }
         }
+    }
+}
         stage('Install Kubectl & ArgoCD CLI Setup') {
             steps {
                 sh '''
