@@ -48,8 +48,8 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                 
                 // Configure git with your user info for the commit
-                sh 'git config user.name "${ayushbh-dev}"'
-                sh 'git config user.email "ayushbh32@gmail.com"'
+                sh 'git config user.name ayushbh-dev'
+                sh 'git config user.email ayushbh32@gmail.com'
 
                 // Add and commit the changed deployment file
                 sh 'git add manifests/deployment.yaml'
