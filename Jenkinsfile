@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    sed -i 's|image: ayush-dev/studybuddy:.*|image: ayush-dev/studybuddy:${IMAGE_TAG}|' manifests/deployment.yaml
+                    sed -i 's|image: ayushbh01/studybuddy:.*|image: ayushbh01/studybuddy:${IMAGE_TAG}|' manifests/deployment.yaml
                     """
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
                         git config user.email "ayushbh32@gmail.com"
                         git add manifests/deployment.yaml
                         git commit -m "Update image tag to ${IMAGE_TAG}" || echo "No changes to commit"
-                        'git push https://${GITHUB_CREDENTIALS}@github.com/data-guru0/STUDY-BUDDY-AI.git HEAD:main'
+                        git push https://${GITHUB_CREDENTIALS}@github.com/ayushbh-dev/Study_Buddy_AI.git HEAD:main
                         // '''
                     }
                 }
